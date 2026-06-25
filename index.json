@@ -35,6 +35,13 @@
       "description": "Rancher 快速切换集群和命名空间（无刷新、可拖动隐藏、环境可管理）",
       "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/rancher.js",
       "version": "3.3.0"
+    },
+    {
+      "id": "tencent-cls",
+      "name": "inner-logs 自动密码并延时跳转",
+      "description": "自动填写免登录密码并在 3 秒后跳转到 CLS 搜索页",
+      "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/tencent-cls.js",
+      "version": "1.2.0"
     }
   ]
 }
