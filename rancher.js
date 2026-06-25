@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name Rancher 快速导航
 // @namespace http://tampermonkey.net/
-// @version 3.2.6
+// @version 3.3.0
 // @description Rancher 快速切换集群和命名空间（无刷新、可拖动隐藏、环境可管理）
 // @match https://rancher.heyteago.com/*
 // @match https://rancher.lan.heytea.com/*
+// @match https://rancher.lan.heytea-co.com/*
 // @grant none
 // @run-at document-end
 // ==/UserScript==
@@ -12,18 +13,37 @@
 (function () {
     'use strict';
 
-    const DEFAULT_ENVS = [
-        { name: 'Go开发', cluster: 'c-m-8sbspbn8', ns: 'dev-go-1' },
-        { name: 'agent开发', cluster: 'c-m-8sbspbn8', ns: 'dev-ai-agent-1' },
-        { name: 'ops开发', cluster: 'c-m-8sbspbn8', ns: 'dev-teaops-1' },
-        { name: '测试Go1', cluster: 'c-dglqx', ns: 'test-go-1' },
-        { name: '测试Go4', cluster: 'c-dglqx', ns: 'test-go-4' },
-        { name: '生产', cluster: 'c-m-5rjxwp4k', ns: 'prod-heyteago' },
-        { name: '生产-agent', cluster: 'c-m-j9z49xg8', ns: 'prod-ai-agent' }
-    ];
-
     const UI_STATE_KEY = 'qn-ui-state';
     const ENVS_KEY = 'qn-envs';
+    const SITE_KEY = location.hostname;
+
+    function storageKey(base) {
+        return `${base}:${SITE_KEY}`;
+    }
+
+    function migrateLegacyStorage() {
+        const envScoped = storageKey(ENVS_KEY);
+        const uiScoped = storageKey(UI_STATE_KEY);
+        try {
+            const legacyEnvs = localStorage.getItem(ENVS_KEY);
+            if (legacyEnvs !== null && localStorage.getItem(envScoped) === null) {
+                localStorage.setItem(envScoped, legacyEnvs);
+                localStorage.removeItem(ENVS_KEY);
+            }
+        } catch (e) {
+            console.warn('[QN] envs 迁移失败', e);
+        }
+        try {
+            const legacyUi = localStorage.getItem(UI_STATE_KEY);
+            if (legacyUi !== null && localStorage.getItem(uiScoped) === null) {
+                localStorage.setItem(uiScoped, legacyUi);
+                localStorage.removeItem(UI_STATE_KEY);
+            }
+        } catch (e) {
+            console.warn('[QN] ui-state 迁移失败', e);
+        }
+    }
+
     const EDGE_THRESHOLD = 20;
     const BTN_SIZE = 48;
     const TOOLBAR_ZONE = 34;
@@ -460,7 +480,7 @@
 
         load() {
             try {
-                const raw = localStorage.getItem(ENVS_KEY);
+                const raw = localStorage.getItem(storageKey(ENVS_KEY));
                 if (raw) {
                     const data = JSON.parse(raw);
                     if (Array.isArray(data.envs)) {
@@ -469,28 +489,15 @@
                     }
                 }
             } catch (e) {
-                console.warn('[QN] envs 解析失败，使用种子数据', e);
+                console.warn('[QN] envs 解析失败，使用空列表', e);
             }
-            this._seed();
-        },
-
-        _seed() {
-            this._envs = DEFAULT_ENVS.map((e, i) => ({
-                id: genId(),
-                name: e.name,
-                clusterId: e.cluster,
-                clusterName: '',
-                ns: e.ns,
-                pinned: false,
-                order: i
-            }));
-            this.save();
+            this._envs = [];
         },
 
         save() {
             if (!this._storageOk) return;
             try {
-                localStorage.setItem(ENVS_KEY, JSON.stringify({ envs: this._envs }));
+                localStorage.setItem(storageKey(ENVS_KEY), JSON.stringify({ envs: this._envs }));
             } catch (e) {
                 this._storageOk = false;
                 console.warn('[QN] localStorage 不可用，环境配置无法持久化');
@@ -561,7 +568,7 @@
             this.x = window.innerWidth - 20 - BTN_SIZE;
             this.y = window.innerHeight - 20 - BTN_SIZE;
             try {
-                const raw = localStorage.getItem(UI_STATE_KEY);
+                const raw = localStorage.getItem(storageKey(UI_STATE_KEY));
                 if (!raw) return;
                 const data = JSON.parse(raw);
                 if (typeof data.x === 'number') this.x = data.x;
@@ -577,7 +584,7 @@
         save() {
             if (!this._storageOk) return;
             try {
-                localStorage.setItem(UI_STATE_KEY, JSON.stringify({
+                localStorage.setItem(storageKey(UI_STATE_KEY), JSON.stringify({
                     x: this.x, y: this.y, hidden: this.hidden, edge: this.edge
                 }));
             } catch (e) {
@@ -1141,6 +1148,7 @@
     function createUI() {
         if (document.querySelector('.qn-wrap')) return;
 
+        migrateLegacyStorage();
         EnvStore.load();
         UIState.load();
 

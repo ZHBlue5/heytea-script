@@ -27,7 +27,7 @@
       "name": "Rancher 快速导航",
       "description": "Rancher 快速切换集群和命名空间（无刷新、可拖动隐藏、环境可管理）",
       "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/rancher.js",
-      "version": "3.2.6"
+      "version": "3.3.0"
     }
   ]
 }
