@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "scripts": [
+    {
+      "id": "cls",
+      "name": "CLS Topic 快速切换",
+      "description": "腾讯云 CLS 日志检索页快速切换 topic_id（可拖动隐藏、Topic 可管理）",
+      "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/cls.js",
+      "version": "1.0.1"
+    },
+    {
+      "id": "devops-bk",
+      "name": "DevOps BK — 变更弹窗增强",
+      "description": "变更弹窗：radio 默认选中 + 复制/新标签页打开 SCC 链接",
+      "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/devops-bk.js",
+      "version": "1.0.3"
+    },
+    {
+      "id": "rancher",
+      "name": "Rancher 快速导航",
+      "description": "Rancher 快速切换集群和命名空间（无刷新、可拖动隐藏、环境可管理）",
+      "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/rancher.js",
+      "version": "3.2.6"
+    }
+  ]
+}

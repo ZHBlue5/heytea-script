@@ -1,0 +1,9 @@
+{
+  "name": "heytea-script",
+  "private": true,
+  "description": "Heytea 官方 Userscript catalog",
+  "scripts": {
+    "generate-index": "node scripts/generate-index.mjs",
+    "check-index": "node scripts/generate-index.mjs --check"
+  }
+}
