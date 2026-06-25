@@ -20,14 +20,14 @@
       "name": "DevOps BK — 变更弹窗增强",
       "description": "变更弹窗：radio 默认选中 + 复制/新标签页打开 SCC 链接",
       "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/devops-bk.js",
-      "version": "1.0.4"
+      "version": "1.0.5"
     },
     {
       "id": "devops-focus",
       "name": "运维平台审核和重试按钮居中脚本增强版",
       "description": "将审核按钮、重试按钮、CANCELED、RUNNING和FAILED状态节点在鼠标悬停时移动到屏幕中间，并自动滚动页面",
       "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/devops-focus.js",
-      "version": "0.8"
+      "version": "0.9"
     },
     {
       "id": "rancher",

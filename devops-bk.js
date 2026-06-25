@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         DevOps BK — 变更弹窗增强
 // @namespace    http://tampermonkey.net/
-// @version      1.0.4
+// @version      1.0.5
 // @description  变更弹窗：radio 默认选中 + 复制/新标签页打开 SCC 链接
 // @match        https://devops-bk.heyteago.com/*
 // @grant        none
+// @inject-into  all-frames
 // @run-at       document-end
 // ==/UserScript==
 

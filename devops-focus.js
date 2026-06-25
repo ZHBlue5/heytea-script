@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         运维平台审核和重试按钮居中脚本增强版
 // @namespace    http://tampermonkey.net/
-// @version      0.8
+// @version      0.9
 // @description  将审核按钮、重试按钮、CANCELED、RUNNING和FAILED状态节点在鼠标悬停时移动到屏幕中间，并自动滚动页面
 // @author       ZHBlue
 // @match        *://devops-bk.heyteago.com/*
 // @grant        none
+// @inject-into  all-frames
 // @run-at       document-idle
 // ==/UserScript==
 
@@ -77,6 +78,8 @@
                 }
                 return true;
             });
+
+            if (allButtons.length === 0) return;
 
             console.log(
                 '找到节点总数:', allButtons.length,
