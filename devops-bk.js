@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DevOps BK — 变更弹窗增强
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  变更弹窗：radio 默认选中 + 复制/新标签页打开 SCC 链接
 // @match        https://devops-bk.heyteago.com/*
 // @grant        none
@@ -201,33 +201,34 @@
     }
 
     function startDialogWatcher() {
-        scanExistingDialogs();
+        function boot() {
+            if (!document.body) return;
+            scanExistingDialogs();
 
-        const observer = new MutationObserver(mutations => {
-            const dialogs = new Set();
-            for (const m of mutations) {
-                if (m.type === 'characterData') {
-                    const db = m.target.parentElement?.closest?.('.bk-dialog-body');
-                    if (db) dialogs.add(db);
-                    continue;
+            const observer = new MutationObserver(mutations => {
+                const dialogs = new Set();
+                for (const m of mutations) {
+                    if (m.type === 'characterData') {
+                        const db = m.target.parentElement?.closest?.('.bk-dialog-body');
+                        if (db) dialogs.add(db);
+                        continue;
+                    }
+                    for (const node of m.addedNodes) {
+                        collectDialogBodies(node, dialogs);
+                    }
                 }
-                for (const node of m.addedNodes) {
-                    collectDialogBodies(node, dialogs);
-                }
-            }
-            dialogs.forEach(processDialog);
-        });
+                dialogs.forEach(processDialog);
+            });
 
-        // ponytail: subtree 捕获弹窗内异步填入的预览文本；characterData 捕获纯文本更新
-        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+            // ponytail: subtree 捕获弹窗内异步填入的预览文本；characterData 捕获纯文本更新
+            observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+        }
+
+        if (document.body) boot();
+        else document.addEventListener('DOMContentLoaded', boot, { once: true });
     }
 
     if (typeof document !== 'undefined') {
         startDialogWatcher();
-    }
-
-    // ponytail: Node 下可跑自测；浏览器里无 module.exports 则跳过
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = { extractUrl };
     }
 })();

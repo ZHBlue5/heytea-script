@@ -20,7 +20,7 @@
       "name": "DevOps BK — 变更弹窗增强",
       "description": "变更弹窗：radio 默认选中 + 复制/新标签页打开 SCC 链接",
       "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/devops-bk.js",
-      "version": "1.0.3"
+      "version": "1.0.4"
     },
     {
       "id": "rancher",
