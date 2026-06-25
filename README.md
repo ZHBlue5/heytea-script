@@ -6,6 +6,7 @@ Heytea 官方 Userscript catalog，供 [Ctool](https://github.com/baiy/Ctool) Us
 
 | 文件 | 说明 |
 |------|------|
+| `ali-log.js` | Intl Logs 一体化自动登录与 SLS 跳转（密码通过 Ctool GM 配置） |
 | `cls.js` | 腾讯云 CLS 日志检索页 Topic 快速切换 |
 | `devops-bk.js` | DevOps BK 变更弹窗增强 |
 | `rancher.js` | Rancher 集群/命名空间快速导航 |
