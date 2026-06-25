@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         inner-logs 自动密码并延时跳转
 // @namespace    heyteago-tools
-// @version      1.2.0
+// @version      1.2.1
 // @description  自动填写免登录密码并在 3 秒后跳转到 CLS 搜索页
 // @match        https://inner-logs.heyteago.com/*
 // @run-at       document-start
@@ -13,7 +13,7 @@
     'use strict';
 
     const KEYWORD = '免登陆跳转服务密码';
-    const REDIRECT_URL = 'https://console.cloud.tencent.com/cls/search?hideLeftNav=true&hideTopNav=true&hideHeader=true&time=now-3d,now&topicType=log&multiple=false&timeZone=browser&analysis=eyJ0eXBlIjoidGFibGUifQ&region=ap-guangzhou&topic_id=ba7dc0b1-50e4-4377-b21e-c47c4ca9f90a&queryBase64=bmFtZXNwYWNlOiJwcm9kLWhzcCI';
+    const REDIRECT_URL = 'https://console.cloud.tencent.com/cls/search?hideLeftNav=true&hideTopNav=true&hideHeader=true&time=now-3d,now&topicType=log&multiple=false&timeZone=browser&analysis=eyJ0eXBlIjoidGFibGUifQ&region=ap-guangzhou&topic_id=20960686-2ec6-43ad-864c-98ce3fc28d7f';
     const REDIRECT_DELAY_MS = 3000;
 
     function installPromptOverride(password) {
