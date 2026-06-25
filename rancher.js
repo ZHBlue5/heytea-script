@@ -1277,7 +1277,7 @@
 
         setInterval(updateFooterButtons, 2000);
 
-        console.log('[QN] UI ready v3.2.6');
+        console.log('[QN] UI ready v3.3.0');
     }
 
     function watchRoute() {
@@ -1287,7 +1287,7 @@
     }
 
     function init() {
-        console.log('[QN] v3.2.6 - 无刷新导航 + 可拖动隐藏 + 环境管理');
+        console.log('[QN] v3.3.0 - 无刷新导航 + 可拖动隐藏 + 环境管理');
 
         const tryInit = () => {
             if (document.body) {
