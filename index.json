@@ -27,7 +27,7 @@
       "name": "运维平台审核和重试按钮居中脚本增强版",
       "description": "将审核按钮、重试按钮、CANCELED、RUNNING和FAILED状态节点在鼠标悬停时移动到屏幕中间，并自动滚动页面",
       "url": "https://raw.githubusercontent.com/ZHBlue5/heytea-script/main/devops-focus.js",
-      "version": "0.9"
+      "version": "0.9.1"
     },
     {
       "id": "rancher",
